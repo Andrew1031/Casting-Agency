@@ -63,8 +63,13 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(data['success'], True)
         self.assertEqual(data['deleted'], toDelete_id)
 
-    # def test_delete_actor_fail(self):
+    def test_delete_actor_fail(self):
+        toDelete_id = str('99999')
+        res = self.client.delete(f'/actors/{toDelete_id}')
 
+        # data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 404)
 
     def test_delete_movie(self):
         toDelete = Movie(title="Avengers", release="2012")
@@ -77,7 +82,13 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(data['success'], True)
         self.assertEqual(data['deleted'], toDelete_id)
 
-    # def test_delete_movie_fail(self):
+    def test_delete_movie_fail(self):
+        toDelete_id = str('99999')
+        res = self.client.delete(f'/movies/{toDelete_id}')
+
+        # data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 404)
 
     def test_create_actor(self):
         toSubmit = {
@@ -92,7 +103,16 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
 
-    # def test_create_actor_fail(self):
+    def test_create_actor_fail(self):
+        toSubmit = {
+            'name': 'John Cena',
+            'age': 44
+        }
+
+        res = self.client.post('/actors', json=toSubmit)
+        # data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 422)
 
     def test_create_movie(self):
         toSubmit = {
@@ -106,7 +126,15 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
 
-    # def test_create_movie_fail(self):
+    def test_create_movie_fail(self):
+        toSubmit = {
+            'title': 'Logan'
+        }
+
+        res = self.client.post('/actors', json=toSubmit)
+        # data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 422)
 
     def test_edit_actor(self):
         toEdit = Actor(name="Norman Reedus", age=52, gender="Male")
@@ -140,7 +168,11 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(data['actor'][0]['gender'], "Female")
         self.assertEqual(data['actor'][0]['name'], "Alexa Bliss")
 
-    # def test_edit_actor_fail(self):
+    def test_edit_actor_fail(self):
+        res = self.client.patch('/actors/99999')
+        # data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 404)
 
     def test_edit_movie(self):
         toEdit = Movie(title="The Conjuring", release="2021")
@@ -170,7 +202,11 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(data['movie'][0]['title'], 'Invincible')
         self.assertEqual(data['movie'][0]['release'], '2022')
 
-    # def test_edit_movie_fail(self):
+    def test_edit_movie_fail(self):
+        res = self.client.patch('/movies/99999')
+        # data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 404)
 
 # Make the tests conveniently executable
 if __name__ == "__main__":

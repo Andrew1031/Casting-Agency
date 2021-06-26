@@ -72,7 +72,8 @@ def create_app(test_config=None):
     name = body.get('name', None)
     age = body.get('age', None)
     gender = body.get('gender', None)
-    if body.get('name') == '' or body.get('age') == '' or body.get('gender') == '':
+    if body.get('name') == '' or body.get('age') == '' or body.get('gender') == ''\
+            or 'name' not in body or 'age' not in body or 'gender' not in body:
       abort(422)
     actor = Actor(name=name, age=age, gender=gender)
     actor.insert()
