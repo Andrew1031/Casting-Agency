@@ -145,8 +145,49 @@ def create_app(test_config=None):
       'movie': [movie_to_edit.format()]
     })
 
-  return app
+  # Error Handlers
 
+  @app.errorhandler(404)
+  def not_found(error):
+    return jsonify({
+      "success": False,
+      "error": 404,
+      "message": "Not found"
+    }), 404
+
+  @app.errorhandler(400)
+  def bad_request(error):
+    return jsonify({
+      "success": False,
+      "error": 400,
+      "message": "Invalid request"
+    }), 400
+
+  @app.errorhandler(422)
+  def unprocessable(error):
+    return jsonify({
+      "success": False,
+      "error": 422,
+      "message": "unprocessable"
+    }), 422
+
+  @app.errorhandler(500)
+  def internal_server_error(error):
+    return jsonify({
+      "success": False,
+      "error": 500,
+      "message": "internal server error"
+    }), 500
+
+  @app.errorhandler(AuthError)
+  def authError(e):
+    return jsonify({
+      'success': False,
+      'error': e.status_code,
+      'message': e.error
+    }), e.status_code
+
+  return app
 
 APP = create_app()
 
