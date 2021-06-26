@@ -1,4 +1,5 @@
 SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:new_password@localhost:5432/castingagency'
+SQLALCHEMY_UNIT_TEST_URI = 'postgresql://postgres:new_password@localhost:5432/castingagencytest'
 LISTINGS_PER_PAGE = 8
 
 # paginate results

@@ -23,6 +23,14 @@ def db_drop_and_create_all():
     db.drop_all()
     db.create_all()
 
+def db_drop_and_create_all_defaults():
+    db.drop_all()
+    db.create_all()
+    actor = Actor(name="Scarlett Johansson", age=36, gender="Female")
+    actor.insert()
+    movie = Movie(title="Black Widow", release="2021")
+    movie.insert()
+
 class Actor(db.Model):
     __tablename__ = 'actors'
 
@@ -75,7 +83,7 @@ class Movie(db.Model):
 
     def delete(self):
         db.session.delete(self)
-        db.session.commit
+        db.session.commit()
 
     def format(self):
         return {

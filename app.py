@@ -85,10 +85,10 @@ def create_app(test_config=None):
   def create_movie():
     body = request.get_json()
     title = body.get('title', None)
-    release_date = body.get('release_date', None)
-    if body.get('title') == '' or body.get('release_date') == '':
+    date = body.get('release', None)
+    if body.get('title') == '' or body.get('release') == '':
       abort(422)
-    movie = Movie(title=title, release_date=release_date)
+    movie = Movie(title=title, release=date)
     movie.insert()
     return jsonify({
       'success': True,
@@ -134,8 +134,8 @@ def create_app(test_config=None):
     if 'title' in body and body['title']:
       movie_to_edit.title = body['title']
 
-    if 'release_date' in body and body['release_date']:
-      movie_to_edit.release_date = body['release_date']
+    if 'release' in body and body['release']:
+      movie_to_edit.release = body['release']
 
     movie_to_edit.update()
     return jsonify({
