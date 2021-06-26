@@ -5,7 +5,19 @@ from flask_sqlalchemy import SQLAlchemy
 
 from app import create_app
 from models import setup_db, Actor, Movie, db_drop_and_create_all_defaults
-from config import SQLALCHEMY_UNIT_TEST_URI
+from config import SQLALCHEMY_UNIT_TEST_URI, bearer_tokens
+
+casting_assistant_auth_header = {
+    'Authorization': bearer_tokens['casting_assistant']
+}
+
+casting_director_auth_header = {
+    'Authorization': bearer_tokens['casting_director']
+}
+
+casting_producer_auth_header = {
+    'Authorization': bearer_tokens['executive_producer']
+}
 
 class TriviaTestCase(unittest.TestCase):
     def setUp(self):
@@ -29,7 +41,9 @@ class TriviaTestCase(unittest.TestCase):
     """
 
     def test_get_actor(self):
-        res = self.client.get('/actors')
+        toGet = Actor(name="Kid Cudi", age=37, gender="Male")
+        toGet.insert()
+        res = self.client.get('/actors', headers=casting_assistant_auth_header)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -40,7 +54,12 @@ class TriviaTestCase(unittest.TestCase):
         res = self.client.get('/actors')
         data = json.loads(res.data)
 
+        self.assertEqual(res.status_code, 404)
+        self.assertEqual(data['success'], False)
+
     def test_get_movie(self):
+        toGet = Movie(title="Avengers", release="2012")
+        toGet.insert()
         res = self.client.get('/movies')
         data = json.loads(res.data)
 
@@ -51,6 +70,9 @@ class TriviaTestCase(unittest.TestCase):
     def test_get_movie_fail(self):
         res = self.client.get('/movies')
         data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 404)
+        self.assertEqual(data['success'], False)
 
     def test_delete_actor(self):
         toDelete = Actor(name="Kid Cudi", age=37, gender="Male")
@@ -66,10 +88,11 @@ class TriviaTestCase(unittest.TestCase):
     def test_delete_actor_fail(self):
         toDelete_id = str('99999')
         res = self.client.delete(f'/actors/{toDelete_id}')
-
-        # data = json.loads(res.data)
+        data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
+        self.assertEqual(data['success'], False)
+
 
     def test_delete_movie(self):
         toDelete = Movie(title="Avengers", release="2012")
