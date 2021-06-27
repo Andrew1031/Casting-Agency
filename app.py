@@ -23,8 +23,8 @@ def create_app(test_config=None):
     return response
 
   # ROUTES
-  @requires_auth('get:actors')
   @app.route('/actors', methods=['GET'])
+  @requires_auth('get:actors')
   def get_actors():
     actors = Actor.query.order_by(Actor.id).all()
     if len(actors) == 0:
@@ -36,8 +36,8 @@ def create_app(test_config=None):
       'actors': actors_paginated
     })
 
-  @requires_auth('get:movies')
   @app.route('/movies', methods=['GET'])
+  @requires_auth('get:movies')
   def get_movies():
     movies = Movie.query.order_by(Movie.id).all()
     if len(movies) == 0:
@@ -49,8 +49,8 @@ def create_app(test_config=None):
       'movies': movies_paginated
     })
 
-  @requires_auth('delete:actor')
   @app.route('/actors/<actor_id>', methods=['DELETE'])
+  @requires_auth('delete:actor')
   def delete_actor(actor_id):
     actorToDelete = Actor.query.get(actor_id)
     if not actorToDelete:
@@ -61,8 +61,8 @@ def create_app(test_config=None):
       'deleted': actor_id
     })
 
-  @requires_auth('delete:movie')
   @app.route('/movies/<movie_id>', methods=['DELETE'])
+  @requires_auth('delete:movie')
   def delete_movie(movie_id):
     movieToDelete = Movie.query.get(movie_id)
     if not movieToDelete:
@@ -73,8 +73,8 @@ def create_app(test_config=None):
       'deleted': movie_id
     })
 
-  @requires_auth('post:actor')
   @app.route('/actors', methods=['POST'])
+  @requires_auth('post:actor')
   def create_actor():
     body = request.get_json()
     name = body.get('name', None)
@@ -90,8 +90,8 @@ def create_app(test_config=None):
       'created': actor.id
     })
 
-  @requires_auth('post:movie')
   @app.route('/movies', methods=['POST'])
+  @requires_auth('post:movie')
   def create_movie():
     body = request.get_json()
     title = body.get('title', None)
@@ -105,8 +105,8 @@ def create_app(test_config=None):
       'created': movie.id
     })
 
-  @requires_auth('patch:actor')
   @app.route('/actors/<actor_id>', methods=['PATCH'])
+  @requires_auth('patch:actor')
   def edit_actor(actor_id):
     body = request.get_json()
     if not body:
@@ -132,8 +132,8 @@ def create_app(test_config=None):
       'actor': [actor_to_edit.format()]
     })
 
-  @requires_auth('patch:movie')
   @app.route('/movies/<movie_id>', methods=['PATCH'])
+  @requires_auth('patch:movie')
   def edit_movie(movie_id):
     body = request.get_json()
     if not body:
