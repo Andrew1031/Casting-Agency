@@ -1,5 +1,5 @@
-SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:new_password@localhost:5432/castingagency'
-SQLALCHEMY_UNIT_TEST_URI = 'postgresql://postgres:new_password@localhost:5432/castingagencytest'
+SQLALCHEMY_DATABASE_URI = 'postgres://rbnrtuxsppxghd:d90022563f31fb3fdfd84cab65fd2fccb5a8101b1b62cec67d2ec8cbce382227@ec2-52-23-45-36.compute-1.amazonaws.com:5432/dfql5rds8pnp1g'
+SQLALCHEMY_UNIT_TEST_URI = 'postgres://rbnrtuxsppxghd:d90022563f31fb3fdfd84cab65fd2fccb5a8101b1b62cec67d2ec8cbce382227@ec2-52-23-45-36.compute-1.amazonaws.com:5432/dfql5rds8pnp1g'
 LISTINGS_PER_PAGE = 8
 
 bearer_tokens = {
