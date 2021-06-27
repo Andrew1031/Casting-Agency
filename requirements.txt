@@ -77,3 +77,4 @@ WTForms==2.3.3
 zope.event==4.4
 zope.interface==5.1.0
 pycryptodome==3.10.1
+gunicorn==20.1.0
