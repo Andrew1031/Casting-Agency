@@ -25,7 +25,6 @@ Flask-RESTful==0.3.7
 Flask-Script==2.0.6
 Flask-SQLAlchemy==2.4.0
 Flask-WTF==0.14.3
-gunicorn==20.0.4
 homebrew==0.2.4
 idna==2.9
 iniconfig==1.1.1
@@ -53,13 +52,11 @@ pycparser==2.20
 Pygments==2.9.0
 PyJWT==1.7.1
 pyparsing==2.4.7
-pypiwin32==223
 pytest==6.2.2
 python-dateutil==2.6.0
 python-dotenv==0.16.0
 python-editor==1.0.4
 pytz==2019.1
-pywin32==300
 PyYAML==5.4.1
 requests==2.23.0
 rsa==4.7.2
@@ -77,4 +74,7 @@ WTForms==2.3.3
 zope.event==4.4
 zope.interface==5.1.0
 pycryptodome==3.10.1
-gunicorn==20.1.0
+psycopg2-binary==2.9.1
+Flask-Script==2.0.6
+gunicorn==20.0.4
+python-jose==3.3.0
