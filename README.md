@@ -5,7 +5,7 @@ The Casting Agency models a company that is responsible for creating movies and 
 The motivation of this project is to create a webapp where small companies can assign actors to movies as well as expand on my knowledge of postgres & SQLAlchemy, API endpoints, unit testing, authorization and role based access, and deployment.
 
 # How to use
-To run the program, simply navigate to ____ where you can access all the API endpoints
+To run the program, simply navigate to https://casting-agency123451.herokuapp.com/ where you can access all the API endpoints
 
 
 JWT tokens are listed here, while other important variables can be found in models.py or config.py :
